@@ -66,6 +66,13 @@ target_link_libraries(viewer
   ${PCL_LIBRARIES}
 )
 
+add_executable(cloud_publisher src/cloud_publisher.cpp)
+target_link_libraries(cloud_publisher
+  ${catkin_LIBRARIES}
+  ${OpenCV_LIBRARIES}
+  ${PCL_LIBRARIES}
+)
+
 #############
 ## Install ##
 #############

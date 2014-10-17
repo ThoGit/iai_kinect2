@@ -1,8 +1,11 @@
 <launch>
+  <arg name="use_calib" default="true" />
   <arg name="publish_frame" default="false" />
+  <arg name="calibration_path" default="$(find kinect2_bridge)/data/sri/" />
 
   <include file="$(find kinect2_bridge)/launch/include/kinect2_frames.launch">
     <arg name="publish_frame" value="$(arg publish_frame)" />
   </include>
-  <node name="kinect2_bridge" pkg="kinect2_bridge" type="kinect2_bridge" respawn="true" output="screen"/>
+  <node if="$(arg use_calib)" name="kinect2_bridge" pkg="kinect2_bridge" type="kinect2_bridge" respawn="true" output="screen" args="-calib $(arg calibration_path)" />
+  <node unless="$(arg use_calib)" name="kinect2_bridge" pkg="kinect2_bridge" type="kinect2_bridge" respawn="true" output="screen" />
 </launch>
